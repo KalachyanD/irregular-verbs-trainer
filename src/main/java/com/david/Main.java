@@ -1,52 +1,64 @@
 package com.david;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
 
-        String dictionaryPath = "/Users/kalachyand/IdeaProjects/irregular-verbs-trainer/src/main/resources/dictionary.csv";
+        String dictionaryPathJar = "dictionary.csv";
 
-        IrregularVerb randomIrregularVerb = getRandomIrregularVerb(getAllIrregularVerbsFromFile(dictionaryPath));
+        try{
+            List<IrregularVerb> allVerbs = getAllIrregularVerbsFromJar(dictionaryPathJar);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Infinitive: " + randomIrregularVerb.getInfinitive());
-        System.out.print("Past: ");
-        String pastInput = scanner.nextLine();
-        System.out.print("Past Participle: ");
-        String pastParticipleInput = scanner.nextLine();
+            IrregularVerb randomIrregularVerb = getRandomIrregularVerb(allVerbs);
 
-        IrregularVerb inputVerb = new IrregularVerb(randomIrregularVerb.getInfinitive(), pastInput, pastParticipleInput);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Infinitive: " + randomIrregularVerb.getInfinitive());
+            System.out.print("Past: ");
+            String pastInput = scanner.nextLine();
+            System.out.print("Past Participle: ");
+            String pastParticipleInput = scanner.nextLine();
 
-        if(randomIrregularVerb.equals(inputVerb)){
-            System.out.print("Correct");
-        }else{
-            System.out.print("Incorrect");
+            IrregularVerb inputVerb = new IrregularVerb(randomIrregularVerb.getInfinitive(), pastInput, pastParticipleInput);
+
+            if(randomIrregularVerb.equals(inputVerb)){
+                System.out.print("Correct\n");
+            }else{
+                System.out.print("Incorrect\n");
+            }
+
+        }catch (Exception e){
+            System.out.println("Something went wrong.");
         }
 
     }
 
-    private static List<IrregularVerb> getAllIrregularVerbsFromFile(String filePath){
+    private static List<IrregularVerb> getAllIrregularVerbsFromJar(String filePath){
         List<IrregularVerb> irregularVerbs = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+
+        ClassLoader classLoader = Main.class.getClassLoader();
+
+        try (InputStream inputStream = classLoader.getResourceAsStream(filePath);
+             Scanner scanner = new Scanner(inputStream)) {
+
             String line;
-            String[] array = new String[3];
+            String[] array;
 
-            while ((line = reader.readLine()) != null) {
-
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
                 array = line.split(",");
-                irregularVerbs.add(new IrregularVerb(array[0],array[1],array[2]));
-
+                irregularVerbs.add(new IrregularVerb(array[0], array[1], array[2]));
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return irregularVerbs;
     }
 
