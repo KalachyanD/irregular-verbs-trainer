@@ -76,7 +76,8 @@ public class VerbTrainer {
             if(i == 0){
                 System.out.println("Welcome to irregular verbs trainer! You will train " + iterationsCount + " verbs.");
             }
-            System.out.println(i+1+".");
+            //Training iteration
+            System.out.println((i + 1) + ".");
             randomIrregularVerb = this.getRandomIrregularVerb();
             System.out.println("Infinitive: " + randomIrregularVerb.getInfinitive());
             System.out.print("Past: ");
@@ -93,6 +94,9 @@ public class VerbTrainer {
                 System.out.println("--------------------");
             } else {
                 System.out.println("Result: Incorrect");
+                System.out.println("Correct forms:");
+                System.out.println("Past: " + randomIrregularVerb.getPast());
+                System.out.println("Past Participle: " + randomIrregularVerb.getPastParticiple());
                 System.out.println("--------------------");
             }
 
