@@ -58,27 +58,48 @@ public class VerbTrainer {
         }
     }
 
-    void train(){
+    void train(int iterationsCount) throws Exception {
 
-        //getting one random verb
-        IrregularVerb randomIrregularVerb = this.getRandomIrregularVerb();
+        if(iterationsCount < 1){
+            throw new Exception("ITERATIONS_COUNT < 1, please update app configuration.");
+        }
+
+        IrregularVerb randomIrregularVerb;
 
         //interaction with user logic
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Infinitive: " + randomIrregularVerb.getInfinitive());
-        System.out.print("Past: ");
-        String pastInput = scanner.nextLine();
-        System.out.print("Past Participle: ");
-        String pastParticipleInput = scanner.nextLine();
+        String pastInput;
+        String pastParticipleInput;
 
-        //checking of equality inserted verb forms and reference ones
-        IrregularVerb inputVerb = new IrregularVerb(randomIrregularVerb.getInfinitive(), pastInput, pastParticipleInput);
+        for(int i = 0 ; i < iterationsCount ; ++i) {
+            //Welcoming message
+            if(i == 0){
+                System.out.println("Welcome to irregular verbs trainer! You will train " + iterationsCount + " verbs.");
+            }
+            System.out.println(i+1+".");
+            randomIrregularVerb = this.getRandomIrregularVerb();
+            System.out.println("Infinitive: " + randomIrregularVerb.getInfinitive());
+            System.out.print("Past: ");
+            pastInput = scanner.nextLine();
+            System.out.print("Past Participle: ");
+            pastParticipleInput = scanner.nextLine();
 
-        //result output for user
-        if(randomIrregularVerb.equals(inputVerb)){
-            System.out.print("Correct\n");
-        }else{
-            System.out.print("Incorrect\n");
+            //checking of equality inserted verb forms and reference ones
+            IrregularVerb inputVerb = new IrregularVerb(randomIrregularVerb.getInfinitive(), pastInput, pastParticipleInput);
+
+            //result output for user
+            if (randomIrregularVerb.equals(inputVerb)) {
+                System.out.println("Result: Correct");
+                System.out.println("--------------------");
+            } else {
+                System.out.println("Result: Incorrect");
+                System.out.println("--------------------");
+            }
+
+            //finishing message
+            if(i == iterationsCount - 1){
+                System.out.println("Training has been finished! See you next time!");
+            }
         }
     }
 
