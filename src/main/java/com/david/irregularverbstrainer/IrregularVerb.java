@@ -1,4 +1,4 @@
-package com.david;
+package com.david.irregularverbstrainer;
 
 public class IrregularVerb {
     private final String infinitive;

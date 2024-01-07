@@ -1,4 +1,4 @@
-package com.david;
+package com.david.irregularverbstrainer;
 
 import java.io.InputStream;
 
@@ -11,12 +11,12 @@ public class VerbTrainer {
     private final List<IrregularVerb> irregularVerbs;
     private final Random randomizer;
 
-    public VerbTrainer(String filePath) {
+    VerbTrainer(String filePath) {
         this.irregularVerbs = this.getAllIrregularVerbsFromJar(filePath);
         this.randomizer = new Random();
     }
 
-    private List<IrregularVerb> getAllIrregularVerbsFromJar(String filePath) {
+    List<IrregularVerb> getAllIrregularVerbsFromJar(String filePath) {
 
         List<IrregularVerb> irregularVerbs = new ArrayList<>();
         ClassLoader classLoader = Main.class.getClassLoader();
@@ -49,7 +49,7 @@ public class VerbTrainer {
         return irregularVerbs;
     }
 
-    private IrregularVerb getRandomIrregularVerb() {
+    IrregularVerb getRandomIrregularVerb() {
 
         if(irregularVerbs.size() > 1){
             return irregularVerbs.get(randomizer.nextInt(irregularVerbs.size()));
@@ -58,7 +58,7 @@ public class VerbTrainer {
         }
     }
 
-    public void startPractise(){
+    void train(){
 
         //getting one random verb
         IrregularVerb randomIrregularVerb = this.getRandomIrregularVerb();
