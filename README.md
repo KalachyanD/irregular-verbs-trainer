@@ -21,7 +21,7 @@ Upon running the application, users will be presented with the infinitive form o
    - Run the following command:
 
      ```bash
-     java -jar irregular-verbs-trainer-1.0.jar
+     java -jar irregular-verbs-trainer-1.1.jar
      ```
 
 3. **Begin Training:**

@@ -5,8 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        VerbTrainerTest.class,
+        VerbsFileReaderFromCsvTest.class,
+        IrregularVerbsRandomizerTest.class
 })
-
-public class AllTestsTestSuite {
+public class AllTestsSuite {
 }
