@@ -11,11 +11,6 @@ public class IrregularVerbsRandomizer {
     }
 
     IrregularVerb getOneRandomIrregularVerb(List<IrregularVerb> irregularVerbs) {
-
-        if(irregularVerbs.size() > 1){
-            return irregularVerbs.get(randomizer.nextInt(irregularVerbs.size()));
-        }else{
-            return irregularVerbs.get(0);
-        }
+        return irregularVerbs.get(randomizer.nextInt(irregularVerbs.size()));
     }
 }
