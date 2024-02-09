@@ -26,12 +26,12 @@ public class VerbsFileReaderFromCsv {
                 if (array.length == verbFormsNumber) {
                     irregularVerbs.add(new IrregularVerb(array[0], array[1], array[2]));
                 } else {
-                    throw new Exception("Invalid CSV line " + irregularVerbs.size() + 1 + ".");
+                    throw new CsvFormatException("Invalid CSV line " + irregularVerbs.size() + 1 + ".");
                 }
             }
 
             if(irregularVerbs.size() == 0){
-                throw new Exception("CSV file is empty or broken.");
+                throw new CsvFormatException("CSV file is empty or broken.");
             }
 
         } catch (Exception e) {
