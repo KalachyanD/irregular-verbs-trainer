@@ -1,9 +1,9 @@
-package com.david;
+package com.david.irregularverbstrainer;
 
 public class IrregularVerb {
-    private String infinitive;
-    private String past;
-    private String pastParticiple;
+    private final String infinitive;
+    private final String past;
+    private final String pastParticiple;
 
     IrregularVerb(String infinitive, String simplePast, String pastParticiple){
         this.infinitive = infinitive;
